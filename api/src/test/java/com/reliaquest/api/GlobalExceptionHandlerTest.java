@@ -40,7 +40,9 @@ class GlobalExceptionHandlerTest {
         assertNotNull(response);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals("Employee Not Found", response.getBody().get("Error"));
-        assertEquals(errorMessage, response.getBody().get("message"));
+        assertEquals(errorMessage, response.getBody().get("Message"));
+        assertEquals(404, response.getBody().get("Status"));
+        assertNotNull(response.getBody().get("Timestamp"));
     }
 
     @Test
@@ -57,7 +59,9 @@ class GlobalExceptionHandlerTest {
         assertNotNull(response);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("Employee Not Created", response.getBody().get("Error"));
-        assertEquals(errorMessage, response.getBody().get("message"));
+        assertEquals(errorMessage, response.getBody().get("Message"));
+        assertEquals(400, response.getBody().get("Status"));
+        assertNotNull(response.getBody().get("Timestamp"));
     }
 
     @Test
@@ -73,7 +77,9 @@ class GlobalExceptionHandlerTest {
         // Assert
         assertNotNull(response);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        assertEquals("Internal Server Error", response.getBody().get("error"));
-        assertEquals(errorMessage, response.getBody().get("message"));
+        assertEquals("Internal Server Error", response.getBody().get("Error"));
+        assertEquals(errorMessage, response.getBody().get("Message"));
+        assertEquals(500, response.getBody().get("Status"));
+        assertNotNull(response.getBody().get("Timestamp"));
     }
 }

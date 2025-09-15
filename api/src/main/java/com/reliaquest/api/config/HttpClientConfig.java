@@ -16,18 +16,14 @@ public class HttpClientConfig {
     public RestTemplate restTemplate() {
         // Configure connection pooling
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
-        connectionManager.setMaxTotal(50); // Maximum total connections
-        connectionManager.setDefaultMaxPerRoute(20); // Maximum connections per route
+        connectionManager.setMaxTotal(50);
+        connectionManager.setDefaultMaxPerRoute(20);
 
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectTimeout(5000, java.util.concurrent.TimeUnit.MILLISECONDS) // Connection timeout
+        RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(5000, java.util.concurrent.TimeUnit.MILLISECONDS)
                 .build();
 
         // Build the HttpClient
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setConnectionManager(connectionManager)
-                .setDefaultRequestConfig(requestConfig)
-                .build();
+        CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(connectionManager).setDefaultRequestConfig(requestConfig).build();
 
         // Create RestTemplate with the custom HttpClient
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);

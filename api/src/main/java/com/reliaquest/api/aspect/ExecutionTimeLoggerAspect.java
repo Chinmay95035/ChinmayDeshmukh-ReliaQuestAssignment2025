@@ -16,10 +16,7 @@ public class ExecutionTimeLoggerAspect {
         long startTime = System.currentTimeMillis();
         Object result = joinPoint.proceed();
         long endTime = System.currentTimeMillis();
-        log.info("Execution time of {}.{}: {} seconds",
-                joinPoint.getSignature().getDeclaringType().getSimpleName(),
-                joinPoint.getSignature().getName(),
-                (endTime - startTime) / 1000.0);
+        log.info("Execution time of {}.{}: {} seconds", joinPoint.getSignature().getDeclaringType().getSimpleName(), joinPoint.getSignature().getName(), (endTime - startTime) / 1000.0);
         return result;
     }
 }

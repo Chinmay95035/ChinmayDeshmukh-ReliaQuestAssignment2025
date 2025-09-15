@@ -35,11 +35,10 @@ public class EmployeeService {
     public Employee getEmployeeById(String id) {
         try {
             if (StringUtils.isEmpty(id)) {
-                throw new IllegalArgumentException("Employee ID cannot be null or empty.");
+                throw new IllegalArgumentException("Employee ID cannot be null or empty or Malformed.");
             }
             log.info("Fetching employee with ID: {}", id);
             Map<String, Object> response = restTemplate.getForObject(BASE_URL + "/" + id, Map.class);
-            //return parseEmployee((Map<String, Object>) response.get("data"));
             return parseEmployeee(response);
         } catch (Exception ex) {
             throw new EmployeeNotFoundException("Employee with ID " + id + " not found.");
@@ -91,7 +90,7 @@ public class EmployeeService {
     public String deleteEmployeeById(String id) {
         try {
             if (StringUtils.isEmpty(id)) {
-                throw new IllegalArgumentException("Employee ID cannot be null or empty.");
+                throw new IllegalArgumentException("Employee ID cannot be null or empty or Malformed.");
             }
             log.info("Deleting employee with ID: {}", id);
             restTemplate.delete(BASE_URL + "/" + id);
