@@ -1,0 +1,15 @@
+spring.application.name: employee-api
+server.port: 8111
+resilience4j:
+  circuitbreaker:
+    instances:
+      employeeServiceCB:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED   # evaluate per number of calls
+        slidingWindowSize: 20            # look at last 20 calls
+        minimumNumberOfCalls: 10         # need at least 10 calls before evaluating
+        failureRateThreshold: 60         # allow up to 60% failures before OPEN
+        waitDurationInOpenState: 15s     # stay OPEN for 15s before retry
+        permittedNumberOfCallsInHalfOpenState: 5  # allow 5 test calls during HALF_OPEN
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
