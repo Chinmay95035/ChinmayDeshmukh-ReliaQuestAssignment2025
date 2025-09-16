@@ -2,6 +2,7 @@ package com.reliaquest.api.controller;
 
 import com.reliaquest.api.exception.EmployeeNotCreatedException;
 import com.reliaquest.api.exception.EmployeeNotFoundException;
+import com.reliaquest.api.exception.EmployeeServiceUnavailableException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -50,5 +51,11 @@ public class GlobalExceptionHandler {
         FieldError fieldError = ex.getBindingResult().getFieldErrors().get(0);
         return new ResponseEntity<>(buildErrorResponse("Validation Failed", fieldError.getDefaultMessage(), HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(EmployeeServiceUnavailableException.class)
+    public ResponseEntity<Map<String, Object>> handleServiceUnavailable(EmployeeServiceUnavailableException ex) {
+        return new ResponseEntity<>(buildErrorResponse("Service Unavailable", ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE), HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
 
 }

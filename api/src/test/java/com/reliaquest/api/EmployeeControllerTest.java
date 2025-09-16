@@ -3,6 +3,7 @@ package com.reliaquest.api;
 import com.reliaquest.api.controller.EmployeeController;
 import com.reliaquest.api.model.Employee;
 import com.reliaquest.api.service.EmployeeService;
+import com.reliaquest.api.service.EmployeeserviceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.*;
 class EmployeeControllerTest {
 
     @Mock
-    private EmployeeService employeeService;
+    private EmployeeserviceImpl employeeService;
 
     @InjectMocks
     private EmployeeController employeeController;

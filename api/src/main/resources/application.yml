@@ -1,5 +1,25 @@
 spring.application.name: employee-api
 server.port: 8111
+resilience4j:
+  circuitbreaker:
+    instances:
+      employeeServiceCB:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 2
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        record-exceptions:
+          - org.springframework.web.client.ResourceAccessException
+          - org.springframework.web.client.HttpServerErrorException
+          - java.net.SocketTimeoutException
+        ignore-exceptions:
+          - com.reliaquest.api.exception.EmployeeNotFoundException
+
+
+
 
 
 

@@ -24,8 +24,7 @@ public class HttpClientConfig {
 
         // Build the HttpClient
         CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(connectionManager).setDefaultRequestConfig(requestConfig).build();
-
-        // Create RestTemplate with the custom HttpClient
+        
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
         return new RestTemplate(requestFactory);
     }
